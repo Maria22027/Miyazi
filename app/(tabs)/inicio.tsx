@@ -148,7 +148,7 @@ export default function Home() {
           </View>
         )}
 
-        {/* ---------- CONTATO ---------- */}
+        {/* ---------- CONTATO ----------- */}
         <Text style={styles.sectionTitle}>Fale Conosco</Text>
         <Text style={styles.contactText}>Telefone: (11) 99999-9999</Text>
         <Text style={styles.contactText}>Email: contato@imobiliaria.com</Text>
