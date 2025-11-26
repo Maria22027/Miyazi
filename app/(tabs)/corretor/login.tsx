@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../src/firebaseConfig";
+import { auth } from "../../../src/firebaseConfig";
 import { router } from "expo-router";
 
 export default function LoginScreen() {
@@ -17,7 +17,7 @@ export default function LoginScreen() {
     try {
       await signInWithEmailAndPassword(auth, email, senha);
       Alert.alert("Sucesso!", "Login realizado!");
-      router.replace("/inicio"); // Volta pra HOME
+      router.replace("../inicio"); // Volta pra HOME
     } catch (error: any) {
       Alert.alert("Erro ao entrar", error.message);
     }

@@ -7,20 +7,18 @@ export default function Home() {
       <Text style={styles.title}>🏡 ConstruTech Imobiliária</Text>
       <Text style={styles.subtitle}>O lugar perfeito para achar seu imóvel</Text>
 
-      <TouchableOpacity style={styles.button} onPress={() => router.push("../inicio")}>
-        <Text style={styles.buttonText}>Ver Imóveis</Text>
+      <TouchableOpacity style={styles.button} onPress={() => router.push("../usuarios/inicio")}>
+        <Text style={styles.buttonText}>Usuários</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => router.push("../chat")}>
-        <Text style={styles.buttonText}>Chatbot</Text>
+      <TouchableOpacity style={styles.button} onPress={() => router.push("../corretor/login")}>
+        <Text style={styles.buttonText}>Corretor</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.buttonOutline}
-        onPress={() => router.push("../login")}
-      >
-        <Text style={styles.buttonOutlineText}>Login / Trocar Usuário</Text>
+       <TouchableOpacity style={styles.button} onPress={() => router.push("../chefe/login")}>
+        <Text style={styles.buttonText}>Chefe</Text>
       </TouchableOpacity>
+
     </View>
   );
 }

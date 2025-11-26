@@ -114,34 +114,21 @@ export default function Home() {
           <View style={styles.categoryDropdown}>
             <TouchableOpacity
               style={styles.categoryOption}
-              onPress={() => router.push("../categorias/casas")}
+              onPress={() => router.push("../usuarios/categorias/casas")}
             >
               <Text style={styles.categoryOptionText}>Casas</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.categoryOption}
-              onPress={() => router.push("../categorias/apartamentos")}
+              onPress={() => router.push("../usuarios/categorias/apartamentos")}
             >
               <Text style={styles.categoryOptionText}>Apartamentos</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.categoryOption}
-              onPress={() => router.push("../categorias/aluguel")}
-            >
-              <Text style={styles.categoryOptionText}>Aluguel</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.categoryOption}
-              onPress={() => router.push("../categorias/venda")}
-            >
-              <Text style={styles.categoryOptionText}>Venda</Text>
-            </TouchableOpacity>
                 <TouchableOpacity
               style={styles.categoryOption}
-              onPress={() => router.push("../categorias/todos")}
+              onPress={() => router.push("../usuarios/categorias/todos")}
             >
               <Text style={styles.categoryOptionText}>Todos os imóveis</Text>
             </TouchableOpacity>
@@ -161,20 +148,8 @@ export default function Home() {
       <View style={styles.floatingMenuContainer}>
         {menuOpen && (
           <View style={styles.menuOptions}>
-            <TouchableOpacity style={styles.menuOption} onPress={() => router.push("../empresa")}>
+            <TouchableOpacity style={styles.menuOption} onPress={() => router.push("../usuarios/empresa")}>
               <Text style={styles.menuOptionText}>Empresa</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.menuOption} onPress={() => router.push("../chat")}>
-              <Text style={styles.menuOptionText}>Chatbot</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.menuOption} onPress={() => router.push("../register")}>
-              <Text style={styles.menuOptionText}>Cadastro</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.menuOption} onPress={() => router.push("../login")}>
-              <Text style={styles.menuOptionText}>Login</Text>
             </TouchableOpacity>
           </View>
         )}
