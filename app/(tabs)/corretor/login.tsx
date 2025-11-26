@@ -17,7 +17,7 @@ export default function LoginScreen() {
     try {
       await signInWithEmailAndPassword(auth, email, senha);
       Alert.alert("Sucesso!", "Login realizado!");
-      router.replace("../inicio"); // Volta pra HOME
+      router.replace("../corretor/inicio"); // Volta pra HOME
     } catch (error: any) {
       Alert.alert("Erro ao entrar", error.message);
     }

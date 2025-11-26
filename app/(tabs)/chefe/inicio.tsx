@@ -39,7 +39,7 @@ export default function InicioChefe() {
         style={[styles.botao, { backgroundColor: "#d9534f" }]}
         onPress={() => router.replace("/")}
       >
-        <Text style={styles.botaoTexto}>🚪 Sair</Text>
+        <Text style={styles.botaoTexto}> Sair</Text>
       </TouchableOpacity>
     </View>
   );

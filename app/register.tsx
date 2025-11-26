@@ -12,21 +12,27 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../src/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 
+import { useRouter } from "expo-router";
+
 export default function RegisterScreen() {
+  const router = useRouter();
+
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
+  
   const [nascimento, setNascimento] = useState("");
-  const [tipo, setTipo] = useState<"corretor" | "comum">("comum");
+  
   const [creci, setCreci] = useState("");
 
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
 
-  // 🔵 MÁSCARA DE CPF
+  // 🔵 MASCARA CPF
   const formatarCPF = (value: string) => {
+    
     const digits = value.replace(/\D/g, "").slice(0, 11);
-
+    
     let cpfFormatado = digits;
 
     if (digits.length > 3 && digits.length <= 6) {
@@ -43,7 +49,7 @@ export default function RegisterScreen() {
     return cpfFormatado;
   };
 
-  // 🔵 MÁSCARA DATA DE NASCIMENTO
+  // 🔵 MASCARA DATA
   const formatarData = (value: string) => {
     const digits = value.replace(/\D/g, "").slice(0, 8);
 
@@ -78,41 +84,34 @@ export default function RegisterScreen() {
   };
 
   const handleRegister = async () => {
-    // CAMPOS VAZIOS
+   
     if (
       !nome ||
       !email ||
       !cpf ||
       !nascimento ||
+      !creci ||
       !senha ||
-      !confirmarSenha ||
-      (tipo === "corretor" && !creci)
+      !confirmarSenha
     ) {
-      Alert.alert("Erro", "Insira todas as suas informações.");
+      Alert.alert("Erro", "Preencha todos os campos.");
       return;
     }
 
-    // CPF INVÁLIDO
+
     if (cpf.replace(/\D/g, "").length !== 11) {
       Alert.alert("Erro", "O CPF deve conter 11 números.");
       return;
     }
 
-    // EMAIL INVÁLIDO
+
     if (!email.includes("@")) {
       Alert.alert("Erro", "Digite um e-mail válido.");
       return;
     }
 
-    // CRECI
-    if (tipo === "corretor" && !/^\d{6}$/.test(creci)) {
-      Alert.alert("Erro", "O CRECI está incorreto.");
-      return;
-    }
-
-    // SENHAS
-    if (!senha) {
-      Alert.alert("Erro", "Digite a senha.");
+    if (!/^\d{6}$/.test(creci)) {
+      Alert.alert("Erro", "O CRECI deve conter exatamente 6 números.");
       return;
     }
 
@@ -122,13 +121,13 @@ export default function RegisterScreen() {
     }
 
     if (senha !== confirmarSenha) {
-      Alert.alert("Erro", "As senhas não são iguais.");
+      Alert.alert("Erro", "As senhas não coincidem.");
       return;
     }
 
-    // IDADE
+
     if (!validarIdade(nascimento)) {
-      Alert.alert("Erro", "Você precisa ter 18 anos ou mais.");
+      Alert.alert("Erro", "Você deve ter 18 anos ou mais.");
       return;
     }
 
@@ -146,11 +145,16 @@ export default function RegisterScreen() {
         email,
         cpf,
         nascimento,
-        tipo,
-        creci: tipo === "corretor" ? creci : null,
+        creci,
+        tipo: "corretor", // 🔵 agora sempre corretor
       });
 
-      Alert.alert("Sucesso!", "Conta criada com sucesso!");
+      Alert.alert("Sucesso!", "Conta criada com sucesso!", [
+        {
+          text: "OK",
+          onPress: () => router.push("../corretor/login"),
+        },
+      ]);
     } catch (error: any) {
       Alert.alert("Erro", error.message);
     }
@@ -158,9 +162,8 @@ export default function RegisterScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Criar Conta</Text>
-
-      {/* NOME */}
+      <Text style={styles.title}>Cadastro de Corretor</Text>
+      
       <TextInput
         placeholder="Nome completo"
         value={nome}
@@ -169,7 +172,7 @@ export default function RegisterScreen() {
         placeholderTextColor="#666"
       />
 
-      {/* EMAIL */}
+
       <TextInput
         placeholder="Email"
         value={email}
@@ -178,85 +181,61 @@ export default function RegisterScreen() {
         placeholderTextColor="#666"
       />
 
-      {/* CPF COM MÁSCARA */}
+
       <TextInput
         placeholder="CPF"
         value={cpf}
-        onChangeText={(text) => setCpf(formatarCPF(text))}
+        onChangeText={(t) => setCpf(formatarCPF(t))}
         style={styles.input}
         keyboardType="numeric"
         placeholderTextColor="#666"
       />
 
-      {/* DATA DE NASCIMENTO COM MÁSCARA */}
+
       <TextInput
         placeholder="Data de nascimento (DD/MM/AAAA)"
         value={nascimento}
-        onChangeText={(text) => setNascimento(formatarData(text))}
+        onChangeText={(t) => setNascimento(formatarData(t))}
         style={styles.input}
         keyboardType="numeric"
         placeholderTextColor="#666"
       />
 
-      <Text style={styles.label}>Você é:</Text>
-
-      {/* SELEÇÃO DO TIPO */}
-      <View style={styles.selectRow}>
-        <TouchableOpacity
-          onPress={() => setTipo("comum")}
-          style={[
-            styles.buttonSelect,
-            tipo === "comum" && styles.buttonActive,
-          ]}
-        >
-          <Text style={styles.buttonText}>Pessoa comum</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => setTipo("corretor")}
-          style={[
-            styles.buttonSelect,
-            tipo === "corretor" && styles.buttonActive,
-          ]}
-        >
-          <Text style={styles.buttonText}>Corretor</Text>
-        </TouchableOpacity>
-      </View>
-
-      {tipo === "corretor" && (
-        <TextInput
-          placeholder="Digite seu CRECI"
-          keyboardType="numeric"
-          maxLength={6}
-          value={creci}
-          onChangeText={setCreci}
-          style={styles.input}
-          placeholderTextColor="#666"
-        />
-      )}
-
-      {/* SENHA */}
+      <TextInput
+        placeholder="CRECI (6 números)"
+        value={creci}
+        onChangeText={setCreci}
+        keyboardType="numeric"
+        maxLength={6}
+        style={styles.input}
+        placeholderTextColor="#666"
+      />
+      
       <TextInput
         placeholder="Senha"
         value={senha}
-        onChangeText={setSenha}
-        style={styles.input}
+        onChangeText=
+        {setSenha}
         secureTextEntry
+        style=
+        {styles.input}
         placeholderTextColor="#666"
       />
 
-      {/* CONFIRMAR SENHA */}
+   
       <TextInput
         placeholder="Confirmar senha"
         value={confirmarSenha}
-        onChangeText={setConfirmarSenha}
-        style={styles.input}
+        onChangeText=
+        {setConfirmarSenha}
         secureTextEntry
+        style =
+        {styles.input}
         placeholderTextColor="#666"
       />
 
-      {/* BOTÃO */}
-      <TouchableOpacity onPress={handleRegister} style={styles.buttonSubmit}>
+      <TouchableOpacity
+       onPress={handleRegister} style={styles.buttonSubmit}>
         <Text style={styles.submitText}>Criar Conta</Text>
       </TouchableOpacity>
     </View>
@@ -276,12 +255,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: "#000",
   },
-  label: {
-    marginTop: 10,
-    marginBottom: 5,
-    color: "#000",
-    fontWeight: "500",
-  },
+
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
@@ -291,26 +265,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     color: "#000",
   },
-  selectRow: {
-    flexDirection: "row",
-    marginVertical: 5,
-  },
-  buttonSelect: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#0066cc",
-    borderRadius: 8,
-    marginRight: 10,
-    backgroundColor: "#4da3ff",
-  },
-  buttonActive: {
-    backgroundColor: "#0066cc",
-    borderColor: "#004c99",
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
+  
   buttonSubmit: {
     backgroundColor: "#007bff",
     padding: 15,
