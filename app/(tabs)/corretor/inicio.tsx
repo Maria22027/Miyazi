@@ -1,83 +1,88 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
-import { router } from "expo-router";
+import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { Link } from "expo-router";
 
-export default function LoginScreen() {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-
-  function login() {
-    if (!email || !senha) {
-      Alert.alert("Erro", "Preencha email e senha");
-      return;
-    }
-
-    // 🔒 Validação fixa do chefe
-    if (email !== "chefe27022@gmail.com" || senha !== "fatec2025") {
-      Alert.alert("Acesso negado", "Email ou senha incorretos!");
-      return;
-    }
-
-    // Sucesso
-    Alert.alert("Sucesso!", "Login realizado!");
-    router.replace("../chefe/inicio"); // Vai para a HOME
-  }
+export default function InicioCorretor() {
+  const imoveis = [
+    {
+      id: 1,
+      titulo: "Casa Moderna",
+      desc: "3 quartos • Centro",
+      imagem: "https://picsum.photos/seed/im1/800/520",
+    },
+    {
+      id: 2,
+      titulo: "Apartamento Luxo",
+      desc: "2 suítes • Vista Mar",
+      imagem: "https://picsum.photos/seed/im2/800/520",
+    },
+    {
+      id: 3,
+      titulo: "Terreno Amplo",
+      desc: "500m² • Bairro Novo",
+      imagem: "https://picsum.photos/seed/im3/800/520",
+    },
+  ];
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Login</Text>
+    <ScrollView style={{ padding: 20, backgroundColor: "#f5f5f5" }}>
+      <Text style={{ fontSize: 28, fontWeight: "bold", marginBottom: 20 }}>
+        Painel do Corretor
+      </Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
+      {imoveis.map((item) => (
+        <View
+          key={item.id}
+          style={{
+            backgroundColor: "white",
+            borderRadius: 12,
+            marginBottom: 20,
+            overflow: "hidden",
+            elevation: 3,
+          }}
+        >
+          <Image
+            source={{ uri: item.imagem }}
+            style={{ width: "100%", height: 180 }}
+          />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Senha"
-        secureTextEntry
-        value={senha}
-        onChangeText={setSenha}
-      />
+          <View style={{ padding: 12 }}>
+            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              {item.titulo}
+            </Text>
+            <Text style={{ color: "#666", marginTop: 4 }}>{item.desc}</Text>
 
-      <TouchableOpacity style={styles.botao} onPress={login}>
-        <Text style={styles.botaoTexto}>Entrar</Text>
-      </TouchableOpacity>
-    </View>
+            <View style={{ marginTop: 12, gap: 10 }}>
+              <Link
+                href={`../imoveis/${item.id}`}
+                style={{
+                  backgroundColor: "#2563eb",
+                  padding: 10,
+                  borderRadius: 8,
+                  textAlign: "center",
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+              >
+                Ver Detalhes
+              </Link>
+
+              <Link
+                href={`../fazer-pedido/${item.id}`}
+                style={{
+                  backgroundColor: "green",
+                  padding: 10,
+                  borderRadius: 8,
+                  textAlign: "center",
+                  color: "white",
+                  fontWeight: "bold",
+                }}
+              >
+                Fazer Pedido
+              </Link>
+            </View>
+          </View>
+        </View>
+      ))}
+    </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 20,
-    backgroundColor: "#fff",
-  },
-  titulo: {
-    fontSize: 28,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  input: {
-    backgroundColor: "#f2f2f2",
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 10,
-  },
-  botao: {
-    backgroundColor: "#007bff",
-    padding: 12,
-    borderRadius: 10,
-    marginTop: 10,
-  },
-  botaoTexto: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-});
