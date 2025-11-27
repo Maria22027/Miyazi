@@ -9,28 +9,28 @@ export default function InicioChefe() {
 
       <TouchableOpacity
         style={styles.botao}
-        onPress={() => router.push("../imoveis")}
+        onPress={() => router.push("../chefe/imoveis")}
       >
         <Text style={styles.botaoTexto}>Ver lista de imóveis</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.botao}
-        onPress={() => router.push("../cadastrar-imovel")}
+        onPress={() => router.push("../chefe/cadastroImo")}
       >
         <Text style={styles.botaoTexto}>Cadastrar novo imóvel</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.botao}
-        onPress={() => router.push("../pedidos")}
+        onPress={() => router.push("../chefe/pedido")}
       >
         <Text style={styles.botaoTexto}>Pedidos dos corretores</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.botao}
-        onPress={() => router.push("../editar")}
+        onPress={() => router.push("../chefe/editar")}
       >
         <Text style={styles.botaoTexto}>Ediatr Imóveis</Text>
       </TouchableOpacity>
