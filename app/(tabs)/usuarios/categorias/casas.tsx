@@ -10,19 +10,19 @@ export default function Casas() {
       titulo: "Casa moderna",
       desc: "3 quartos • Centro",
       imagem: "https://placehold.co/300x200",
-      url: "../categorias/imoveis/casa1",
+      url: "../usuarios/imoveis/casa1",
     },
     {
       titulo: "Apto com vista",
       desc: "2 quartos • Vista livre",
       imagem: "https://placehold.co/300x200",
-      url: "../categorias/imoveis/apto1",
+      url: "../usuarios/imoveis/casa1",
     },
     {
       titulo: "Casa gourmet",
       desc: "Piscina • 240m²",
       imagem: "https://placehold.co/300x200",
-      url: "/categorias/imoveis/casa2", // já absoluta - ok
+      url: "../usuarios/imoveis/casa1", // já absoluta - ok
     },
   ];
 

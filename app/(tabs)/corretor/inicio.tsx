@@ -11,18 +11,21 @@ export default function InicioCorretor() {
       titulo: "Casa Moderna",
       desc: "3 quartos • Centro",
       imagem: "https://picsum.photos/seed/im1/800/520",
+      url: "/corretor/imoveis/detalhes1",
     },
     {
       id: 2,
       titulo: "Apartamento Luxo",
       desc: "2 suítes • Vista Mar",
       imagem: "https://picsum.photos/seed/im2/800/520",
+      url: "/corretor/imoveis/detalhes2",
     },
     {
       id: 3,
       titulo: "Terreno Amplo",
       desc: "500m² • Bairro Novo",
       imagem: "https://picsum.photos/seed/im3/800/520",
+      url: "/corretor/imoveis/detalhes3",
     },
   ];
 
@@ -57,7 +60,8 @@ export default function InicioCorretor() {
 
               <View style={{ marginTop: 12 }}>
                 <Link
-                  href={`../imoveis/${item.id}`}
+
+                  href={item.url}
                   style={{
                     backgroundColor: "#2563eb",
                     padding: 10,
@@ -99,18 +103,30 @@ export default function InicioCorretor() {
           >
 
             {/* FAZER PEDIDO */}
-            <Link href="../corretor/pedido" asChild>
+            <Link href="/corretor/pedido" asChild>
               <TouchableOpacity>
-                <Text style={{ fontSize: 16, fontWeight: "bold", color: "green" }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "bold",
+                    color: "green",
+                  }}
+                >
                   Fazer Pedido
                 </Text>
               </TouchableOpacity>
             </Link>
 
             {/* LISTA DE IMÓVEIS */}
-            <Link href="../corretor/imoveis" asChild>
+            <Link href="/corretor/imoveis" asChild>
               <TouchableOpacity>
-                <Text style={{ fontSize: 16, fontWeight: "bold", color: "#8a2be2" }}>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "bold",
+                    color: "#8a2be2",
+                  }}
+                >
                   Imóveis
                 </Text>
               </TouchableOpacity>

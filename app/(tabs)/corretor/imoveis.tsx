@@ -8,6 +8,7 @@ export default function ListaImoveisCorretor() {
       titulo: "Casa Moderna",
       desc: "3 quartos • Centro",
       imagem: "https://picsum.photos/seed/im1/800/520",
+      pagina: "../../corretor/detalhe",
     },
     {
       id: 2,
