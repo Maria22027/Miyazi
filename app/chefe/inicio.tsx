@@ -5,7 +5,7 @@ export default function InicioChefe() {
   return (
     <View style={styles.screen}>
       <View style={styles.card}>
-        <Text style={styles.title}>Olá, Chefe</Text>
+        <Text style={styles.title}>Olá, Adiministrador</Text>
         <Text style={styles.subtitle}>O que deseja fazer hoje?</Text>
 
         <TouchableOpacity style={styles.btn} onPress={() => router.push("../chefe/imoveis")}>

@@ -23,8 +23,10 @@ export default function DetalhesImovel() {
 
   return (
     <ScrollView style={styles.container}>
-      <Image source={{ uri: img }} style={styles.imagemPrincipal} />
-
+      <Image
+  source={{ uri: Array.isArray(img) ? img[0] : img ?? '' }}
+  style={styles.imagemPrincipal}
+/>
       <View style={styles.card}>
         <Text style={styles.titulo}>{nome}</Text>
         <Text style={styles.subtitulo}>{descricaoCurta}</Text>

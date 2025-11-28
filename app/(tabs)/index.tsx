@@ -4,19 +4,19 @@ import { router } from "expo-router";
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>🏡 ConstruTech Imobiliária</Text>
+      <Text style={styles.title}>ConstruTech Imobiliária</Text>
       <Text style={styles.subtitle}>O lugar perfeito para achar seu imóvel</Text>
 
       <TouchableOpacity style={styles.button} onPress={() => router.push("../usuarios/inicio")}>
         <Text style={styles.buttonText}>Usuários</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => router.push("../corretor/login")}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push("../login")}>
         <Text style={styles.buttonText}>Corretor</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => router.push("../chefe/login")}>
-        <Text style={styles.buttonText}>Chefe</Text>
+      <TouchableOpacity style={styles.button} onPress={() => router.push("../login")}>
+        <Text style={styles.buttonText}>Administrador</Text>
       </TouchableOpacity>
     </View>
   );

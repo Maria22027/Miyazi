@@ -14,7 +14,7 @@ import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 import { useRouter } from "expo-router";
 
-import { db, storage } from "../../../src/firebaseConfig";
+import { db, storage } from "../../src/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 

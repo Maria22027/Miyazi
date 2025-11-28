@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 export default function InicioCorretor() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -137,6 +137,15 @@ export default function InicioCorretor() {
                 </Text>
               </TouchableOpacity>
             </Link>
+
+
+<TouchableOpacity onPress={() => router.replace("/")}>
+          <Text 
+         style={{ fontSize: 16, fontWeight: "600", color: "#eb2525ff" }}
+          >
+            Sair</Text>
+        </TouchableOpacity>
+
           </View>
         )}
 

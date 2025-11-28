@@ -1,30 +1,47 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from "react-native";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../src/firebaseConfig";
 import { router } from "expo-router";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  function login() {
+  async function login() {
     if (!email || !senha) {
       Alert.alert("Erro", "Preencha email e senha");
       return;
     }
 
-    if (email !== "chefe27022@gmail.com" || senha !== "fatec2025") {
-      Alert.alert("Acesso negado", "Email ou senha incorretos!");
+    // Login do chefe
+    if (email === "chefe27022@gmail.com" && senha === "fatec2025") {
+      Alert.alert("Sucesso!", "Login do chefe realizado!");
+      router.replace("../chefe/inicio");
       return;
     }
 
-    Alert.alert("Sucesso!", "Login realizado!");
-    router.replace("../chefe/inicio");
+    // Login normal (Firebase)
+    try {
+      await signInWithEmailAndPassword(auth, email, senha);
+      Alert.alert("Sucesso!", "Login realizado!");
+      router.replace("../corretor/inicio");
+    } catch (error: any) {
+      Alert.alert("Erro ao entrar", error.message);
+    }
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.titulo}>Acesso</Text>
+        <Text style={styles.titulo}>Bem-vindo</Text>
 
         <TextInput
           style={styles.input}
@@ -45,6 +62,14 @@ export default function LoginScreen() {
 
         <TouchableOpacity style={styles.botao} onPress={login}>
           <Text style={styles.botaoTexto}>Entrar</Text>
+        </TouchableOpacity>
+
+        {/* Botão de criar conta para usuários normais */}
+        <TouchableOpacity
+          style={{ marginTop: 20 }}
+          onPress={() => router.push("/register")}
+        >
+          <Text style={styles.link}>Criar conta</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -90,5 +115,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     fontSize: 18,
+  },
+  link: {
+    textAlign: "center",
+    color: "#2563eb",
+    fontSize: 16,
+    fontWeight: "500",
   },
 });

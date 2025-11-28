@@ -23,7 +23,7 @@ export default function Register() {
     }
 
     Alert.alert("Conta criada!", "Seu cadastro foi realizado.");
-    router.replace("/");
+    router.replace("../corretor/inicio");
   }
 
   return (

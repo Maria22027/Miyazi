@@ -52,27 +52,6 @@ export default function Home() {
           ))}
         </View>
 
-        {/* CATEGORIAS */}
-        <TouchableOpacity style={styles.categoryButton} onPress={() => setCategoriesOpen(!categoriesOpen)}>
-          <Text style={styles.categoryButtonText}>Categorias {categoriesOpen ? "▲" : "▼"}</Text>
-        </TouchableOpacity>
-
-        {categoriesOpen && (
-          <View style={styles.categoryDropdown}>
-            <TouchableOpacity style={styles.categoryOption} onPress={() => router.push("../usuarios/categorias/casas")}>
-              <Text style={styles.categoryOptionText}>Casas</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.categoryOption} onPress={() => router.push("../usuarios/categorias/apartamentos")}>
-              <Text style={styles.categoryOptionText}>Apartamentos</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.categoryOption} onPress={() => router.push("../usuarios/categorias/todos")}>
-              <Text style={styles.categoryOptionText}>Todos os imóveis</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-
         {/* CONTATO */}
         <Text style={styles.sectionTitle}>Fale Conosco</Text>
         <Text style={styles.contactText}>Telefone: (11) 99999-9999</Text>
@@ -88,6 +67,18 @@ export default function Home() {
           <View style={styles.menuOptions}>
             <TouchableOpacity style={styles.menuOption} onPress={() => router.push("../usuarios/empresa")}>
               <Text style={styles.menuOptionText}>Empresa</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.menuOption} onPress={() => router.push("../usuarios/categorias/apartamento")}>
+              <Text style={styles.menuOptionText}>Apartamentos</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.menuOption} onPress={() => router.push("../usuarios/categorias/casas")}>
+              <Text style={styles.menuOptionText}>Casa</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.menuOption} onPress={() => router.push("../usuarios/categorias/todos")}>
+              <Text style={styles.menuOptionText}>Imóveis</Text>
             </TouchableOpacity>
           </View>
         )}
